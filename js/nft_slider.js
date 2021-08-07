@@ -25,7 +25,7 @@
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${username}">${path}</a>`)
+      node = $(`<a target="_blank" href="http://opensea.io/${username}">${path}</a>`)
         .attr('id', 'ethAddress');
       addrElem.append(node);
     }
@@ -73,13 +73,13 @@
           // }
 
           return `<div>
-              <img src="${asset.image_url}" />
+              <img target="_blank" href="${asset.permalink}" src="${asset.image_url}" />
               <p class="collection_title">
                 <img src="${asset.collection.image_url}" />
-                <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
+                <a target="_blank" href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
               </p>
               <p class="item_name">
-                <a href="${asset.permalink}">${asset_name}</a>
+                <a target="_blank" href="${asset.permalink}">${asset_name}</a>
               </p>
             </div>`;
         }).join('');
