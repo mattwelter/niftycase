@@ -5,325 +5,41 @@
     <meta name="description" content="Embed your owned NFTs on Notion">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/nft_slider.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
     <style>
-    body {
-      font-family: "Inter", san-serif;
-      background-color: white;
-    }
-
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    #top, section, nav, #items {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    #top {
-      margin-bottom: 4px;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    section, #items {
-      display: block;
-    }
-
-    section img {
-      width: 24px;
-    }
-
-    #ethAddress, #ethAddress:visited {
-      vertical-align: super;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    #ethAddress:hover {
-      text-decoration: underline;
-    }
-
-    .flex-container > div {
-      background-color: #fafafa;
-      width: 184px;
-      margin: 0px 8px;
-      text-align: left;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
-      border-radius: 8px;
-    }
-
-    .collection_title {
-      font-size: 14px;
-      vertical-align: super;
-      padding-left: 8px;
-      overflow: hidden;
-      font-weight: 500;
-    }
-
-    .collection_title, .collection_title:visited {
-      color: #707980;
-      text-decoration: none;
-    }
-
-    .item_name {
-      font-size: 16px;
-      overflow: hidden;
-      font-weight: 500;
-      padding-bottom: 8px;
-    }
-
-    .item_name, .item_name:visited {
-      color: #333;
-      text-decoration: none;
-    }
-
-    .flex-container > div > p {
-      margin: 4px 8px 4px 8px;
-    }
-
-    .flex-container > div > p:nth-child(3) {
-      margin-bottom: 12px;
-    }
-
-    .flex-container > div > img {
-      width: 168px;
-      margin: 8px;
-      border-radius: 6px;
-    }
-
-    .slide {
-      display: none;
-    }
-
-    .active {
-      display: flex;
-    }
-
-    section, nav {
-      position: relative;
-      display: inline;
-    }
-
-    p > img {
-      width: 20px;
-      border-radius: 50px;
-      margin-bottom: 1px;
-    }
-
-    nav {
-      text-align: right;
-      float: right;
-      margin-top: 4px;
-      letter-spacing: 4px;
-      font-size: 18px;
-      color: #aaa;
-    }
-
-    nav a {
-      cursor: pointer;
-    }
-
-    #btn-prev {
-      margin-right: 8px;
-    }
-
-    #btn-next {
-      margin-left: 8px;
-    }
-
-    .highlight {
-      color: #333;
-    }
-
-    @media screen and (max-width: 815px) {
-      #top, section, nav, #items {
-        max-width: 616px;
-      }
-      .flex-container > div {
-        margin: 8px;
-      }
-    }
-
-    @media screen and (max-width: 616px) {
-      #top, section, nav, #items {
-        max-width: 416px;
-      }
-    }
-
-    @media screen and (max-width: 416px) {
-      #top, section, nav, #items {
-        max-width: 359px;
-      }
-      .flex-container > div {
-        width: 163px;
-      }
-      .flex-container > div > img {
-        width: 147px;
-      }
-      .item_name {
-        font-size: 14px;
-      }
-      .collection_title {
-        font-size: 12px;
-      }
-    }
     </style>
 
     <script type="text/javascript">
       (function() {
         "use strict";
 
-        const URL = 'https://api.opensea.io/api/v1/assets?owner=0x6c4cb3c4da1cdc4b7b1f41099f6eacbd82d8f2d2&order_direction=desc&offset=0&limit=40';
-        let curr = 0, pages = [], count = 0;
-
-        function split2slices(arr) {
-          let i, l, result = [], per_page = 4;
-          for (i = 0, l = arr.length; i < l; i += per_page)  {
-            result.push(arr.slice(i, i + per_page));
-          }
-          return result;
-        }
-
-        let onNext = function(event) {
-          curr = (curr + 1) % count;
-
-          $('.active').toggleClass('active');
-          $(`#item-${curr}`).toggleClass('active');
-          $('.highlight').toggleClass('highlight');
-          $(`[data-target="#item-${curr}"]`).toggleClass('highlight');
-        };
-
-        let onPrev = function(event) {
-          let c = curr - 1;
-          while(c < 0) { c += count; }
-          curr = c;
-
-          $('.active').toggleClass('active');
-          $(`#item-${curr}`).toggleClass('active');
-          $('.highlight').toggleClass('highlight');
-          $(`[data-target="#item-${curr}"]`).toggleClass('highlight');
-        };
-
-        let onCurr = function(event) {
-          let elem = event.target;
-          let target = elem.dataset.target;
-
-          let [tag, num] = target.split('-');
-          curr = parseInt(num);
-
-          $('.active').toggleClass('active');
-          $(target).toggleClass('active');
-          $('.highlight').toggleClass('highlight');
-          $(`[data-target="${target}"]`).toggleClass('highlight');
-        };
-
-        let onSuccess = function(data) {
-          let html;
-
-          pages = split2slices(data.assets);
-          count = pages.length;
-
-          // create navigation
-          let btn, elem = $('nav');
-          btn = $(`<a><</a>`).attr('id', 'btn-prev');
-          btn.click(onPrev);
-          elem.append(btn);
-
-          for (let i=0; i < count; i++) {
-            btn = $(`<a>${i+1}</a>`).attr('data-target', `#item-${i}`);
-            if (i == curr) {
-              btn.toggleClass('highlight');
-            }
-            btn.click(onCurr);
-            elem.append(btn);
-          }
-
-          btn = $(`<a>></a>`).attr('id', 'btn-next');
-          btn.click(onNext);
-          elem.append(btn);
-
-
-          // create navigation
-          let ethAddress, eee = $('section');
-          var length = 6;  // set to the number of characters you want to keep
-          var pathname = `${data.assets[0].owner.address}`;
-          var trimmedPathname = pathname.substring(0, Math.min(length,pathname.length));
-          var trimmedPathname2 = pathname.substring(38);
-          ethAddress = $(`<a href="http://opensea.io/${data.assets[0].owner.user.username}">${trimmedPathname}...${trimmedPathname2}</a>`).attr('id', 'ethAddress');
-          eee.append(ethAddress);
-
-
-          // create cards
-          html = '';
-          pages.forEach((item, i) => {
-            html += `<div id="item-${i}" class="flex-container slide ${i == 0 ? 'active' : ''}">`;
-
-            html += item.map(asset => {
-
-              if (`${asset.collection.name}`.length <= 15) {
-                var collection_title = `${asset.collection.name}`
-
-              } else if (`${asset.collection.name}`.length > 15) {
-                var length = 14;  // set to the number of characters you want to keep
-                var pathname = `${asset.collection.name}`;
-                var collection_title = pathname.substring(0, Math.min(length,pathname.length)) + "...";
-              }
-
-              if (`${asset.name}`.length <= 18) {
-                var asset_name = `${asset.name}`
-
-              } else if (`${asset.name}`.length > 18) {
-                var length = 16;  // set to the number of characters you want to keep
-                var pathname = `${asset.name}`;
-                var asset_name = pathname.substring(0, Math.min(length,pathname.length)) + "...";
-              }
-
-              return `<div>
-                  <img src="${asset.image_url}" />
-                  <p><img src="${asset.collection.image_url}" /><a href="https://opensea.io/${asset.collection.slug}" class="collection_title">${collection_title}</a></p>
-                  <p><a href="${asset.permalink}" class="item_name">${asset_name}</a></p>
-                </div>`
-            }).join('\n');
-            html += `</div>`;
-          });
-          $('#items').html(html);
-        };
-
         $(document).ready(() => {
-          // $('#btn-prev').click(onPrev);
-          // $('#btn-next').click(onNext);
-
-          $.ajax({
-            url: URL,
-            success: onSuccess
+          $('.nft-slider').each(function() {
+            $(this).nftSlider({
+              // addr: $(this).attr('data-addr')
+            });
           });
         });
-
       })();
     </script>
   </head>
 
   <body>
-    <div id="stage">
+    <!-- data-addr="0x6c4cb3c4da1cdc4b7b1f41099f6eacbd82d8f2d2" -->
+    <div id="stage" class="slider nft-slider" >
       <div id="top">
         <section>
           <img src="media/ethLogo.png" alt="">
         </section>
-        <nav>
-          <!--
-          <a id="btn-prev">&lt</a>
-          <a id="btn-next">&gt</a>
-          -->
-        </nav>
+        <nav></nav>
       </div>
-      <div id="items"></div>
+      <div id="slides"></div>
     </div>
+
   </body>
 </html>
