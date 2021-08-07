@@ -3,47 +3,50 @@ body {
   background-color: white;
 }
 
-.flex-container {
+.nft-slider {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.flex-container > div {
-  background-color: #fafafa;
-  width: 184px;
-  margin: 0px 8px;
-  text-align: left;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
-  border-radius: 8px;
-  padding-bottom: 12px;
+.ntf-slider header#top {
+  display: flex;
+  flex-direction: row;
+  line-height: 24px;
 }
 
-.flex-container > div > p {
-  margin: 4px 8px 4px 8px;
+header#top > div {
+  display: inline-block;
+  margin-top: 4px;
 }
 
-.flex-container > div > img {
-  width: 168px;
-  margin: 8px;
-  border-radius: 6px;
-}
-
-#top, section, nav, #slides {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-#top {
-  margin-bottom: 4px;
-}
-
-section, #slides {
-  display: block;
-}
-
-section img {
+header#top img {
   width: 24px;
+  height: auto;
 }
+
+header#top nav {
+  text-align: right;
+  float: right;
+  margin-top: 4px;
+  letter-spacing: 4px;
+  font-size: 18px;
+  color: #aaa;
+  user-select: none;
+}
+
+header#top nav a {
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+header#top nav a:hover {
+  color: #333;
+}
+
+header#top nav .active {
+  color: #333;
+}
+
 
 #ethAddress, #ethAddress:visited {
   vertical-align: super;
@@ -55,104 +58,90 @@ section img {
   text-decoration: underline;
 }
 
-.collection_title {
-  font-size: 14px;
-  vertical-align: super;
-  padding-left: 8px;
-  overflow: hidden;
-  font-weight: 500;
+.slide {
+  display: none;
+  overflow-x: scroll;
 }
 
-.collection_title, .collection_title:visited {
+.slide img {
+  height: auto;
+  width: 100%;
+  min-width: 84px;
+  border-radius: 6px;
+}
+
+.slide p img {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  margin-bottom: 1px;
+  vertical-align:middle;
+}
+
+.slide > div {
+  background-color: #fafafa;
+  margin: 0px 8px 10px;
+  padding: 0.4rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
+}
+
+.slide > div p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.collection_title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #707980;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collection_title a, .collection_title a:visited {
   color: #707980;
   text-decoration: none;
 }
 
-.item_name {
-  font-size: 16px;
-  overflow: hidden;
-  font-weight: 500;
-  padding-bottom: 8px;
+.collection_title:hover,
+.collection_title a:hover {
+  color: #333;
 }
 
-.item_name, .item_name:visited {
-  color: #333;
+.item_name {
+  color: #707980;
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item_name a, .item_name a:visited {
+  color: #707980;
   text-decoration: none;
 }
 
-#slides .slide {
-  display: none;
-}
-
-#slides .active {
-  display: flex;
-}
-
-section, nav {
-  position: relative;
-  display: inline;
-}
-
-p > img {
-  width: 20px;
-  border-radius: 50px;
-  margin-bottom: 1px;
-}
-
-nav {
-  text-align: right;
-  float: right;
-  margin-top: 4px;
-  letter-spacing: 4px;
-  font-size: 18px;
-  color: #aaa;
-}
-
-nav a {
-  cursor: pointer;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-#btn-prev {
-  margin-right: 8px;
-}
-
-#btn-next {
-  margin-left: 8px;
-}
-
-nav .active {
+.item_name:hover,
+.item_name a:hover {
   color: #333;
 }
 
-@media screen and (max-width: 815px) {
-  #top, section, nav, #slides {
-    max-width: 616px;
-  }
-  .flex-container > div {
-    margin: 8px;
-  }
-}
-
-@media screen and (max-width: 616px) {
-  #top, section, nav, #slides {
-    max-width: 416px;
-  }
+#slides .active {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
 }
 
 @media screen and (max-width: 416px) {
-  #top, section, nav, #slides {
-    max-width: 359px;
-  }
-  .flex-container > div {
-    width: 163px;
-  }
-  .flex-container > div > img {
-    width: 147px;
-  }
   .item_name {
     font-size: 14px;
   }

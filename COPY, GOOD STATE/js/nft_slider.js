@@ -22,8 +22,8 @@
     }
 
     let makeETHAdress = function(addr, username) {
-      let path, node, addrElem = $(self).find('header div');
-      path = addr.substring(0,Math.min(6, addr.length)) + '…' +
+      let path, node, addrElem = $(self).find('section');
+      path = addr.substring(0,Math.min(6, addr.length)) + '...' +
         addr.substring(addr.length - 4);
       node = $(`<a href="http://opensea.io/${username}">${path}</a>`)
         .attr('id', 'ethAddress');
@@ -60,27 +60,35 @@
         html += `<div id="slide-${i}" class="flex-container slide ${i === 0 ? 'active' : ''}">`;
         html += item.map(asset => {
 
-          let asset_name = asset.name || 'Untitled';
-          // if (asset_name.length > opts.asset_title_len) { // maybe use css
-          //   asset_name = asset_name.substring(
-          //     0, Math.min(opts.asset_title_len-1, asset_name.length)) + '…';
-          // }
+          if (`${asset.collection.name}`.length <= 15) {
+            var collection_title = `${asset.collection.name}`
 
-          let collection_name = asset.collection.name || 'Untitled';
-          // if (collection_name.length > opts.coll_title_len) { // maybe use css
-          //   collection_name = collection_name.substring(
-          //     0, Math.min(opts.coll_title_len, collection_name.length)) + '…';
-          // }
+          } else if (`${asset.collection.name}`.length > 15) {
+            var length = 14;  // set to the number of characters you want to keep
+            var pathname = `${asset.collection.name}`;
+            var collection_title = pathname.substring(0, Math.min(length,pathname.length)) + "...";
+          }
 
+          if (`${asset.name}`.length <= 18) {
+            var asset_name = `${asset.name}`
+
+          } else if (`${asset.name}`.length > 18) {
+            var length = 16;  // set to the number of characters you want to keep
+            var pathname = `${asset.name}`;
+            var asset_name = pathname.substring(0, Math.min(length,pathname.length)) + "...";
+          }
+
+          
           return `<div>
               <img src="${asset.image_url}" />
-              <p class="collection_title">
+              <p>
                 <img src="${asset.collection.image_url}" />
-                <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
+                <a
+                  href="https://opensea.io/${asset.collection.slug}"
+                  class="collection_title"
+                >${collection_title}</a>
               </p>
-              <p class="item_name">
-                <a href="${asset.permalink}">${asset_name}</a>
-              </p>
+              <p><a href="${asset.permalink}" class="item_name">${asset_name}</a></p>
             </div>`;
         }).join('');
         html += '</div>';
@@ -121,6 +129,8 @@
     };
 
     let onSuccess = function(data) {
+      console.log(data);
+
       slides = splitToSlices(data.assets);
       count = slides.length;
 
@@ -149,8 +159,6 @@
   };
 
   $.fn.nftSlider.defaults = {
-    asset_title_len: 18,
-    coll_title_len: 15,
     params: {
       offset: 0,
       limit: 40,
