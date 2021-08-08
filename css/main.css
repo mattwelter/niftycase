@@ -142,11 +142,15 @@ header#top nav .active {
   /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 600px) {
   .item_name {
     font-size: 14px;
   }
   .collection_title {
     font-size: 12px;
+  }
+  #slides .active {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
   }
 }
