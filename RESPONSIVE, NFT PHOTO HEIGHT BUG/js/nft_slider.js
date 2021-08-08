@@ -25,7 +25,7 @@
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${username}">${path}</a>`)
+      node = $(`<a target="_blank" href="http://opensea.io/${username}">${path}</a>`)
         .attr('id', 'ethAddress');
       addrElem.append(node);
     }
@@ -73,14 +73,13 @@
           // }
 
           return `<div>
-<div class="card-img" style="background-image: url(${asset.image_url});"></div>
-<!--              <img src="${asset.image_url}" /> -->
-              <p class="collection-name">
+              <a target="_blank" href="${asset.permalink}" ><img src="${asset.image_url}" /></a>
+              <p class="collection_title">
                 <img src="${asset.collection.image_url}" />
-                <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
+                <a target="_blank" href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
               </p>
-              <p class="asset-name">
-                <a href="${asset.permalink}">${asset_name}</a>
+              <p class="item_name">
+                <a target="_blank" href="${asset.permalink}">${asset_name}</a>
               </p>
             </div>`;
         }).join('');
@@ -150,8 +149,8 @@
   };
 
   $.fn.nftSlider.defaults = {
-    // asset_title_len: 18,
-    // coll_title_len: 15,
+    asset_title_len: 18,
+    coll_title_len: 15,
     params: {
       offset: 0,
       limit: 40,

@@ -47,6 +47,7 @@ header#top nav .active {
   color: #333;
 }
 
+
 #ethAddress, #ethAddress:visited {
   vertical-align: super;
   color: inherit;
@@ -60,19 +61,14 @@ header#top nav .active {
 .slide {
   display: none;
   overflow-x: scroll;
-  grid-gap: 0px;
-  grid-template-columns: repeat(4, minmax(140px, 1fr));
-  /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
 }
 
-/* deprecated
 .slide img {
   height: auto;
   width: 100%;
   min-width: 84px;
   border-radius: 6px;
 }
-*/
 
 .slide p img {
   width: 20px;
@@ -91,30 +87,13 @@ header#top nav .active {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
 }
 
-.slide div p {
+.slide > div p {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.card-img:before {
-  content: '';
-  display: block;
-  width: 100%;
-  padding-top: 100%;
-}
-
-.card-img {
-  display: block;
-  border-radius: 6px;
-  box-sizing: border-box;
-  background-color: #f3f3f3;
-  background-size: contain; /*cover;*/
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.collection-name {
+.collection_title {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -125,17 +104,17 @@ header#top nav .active {
   text-overflow: ellipsis;
 }
 
-.collection-name a, .collection-name a:visited {
+.collection_title a, .collection_title a:visited {
   color: #707980;
   text-decoration: none;
 }
 
-.collection-name:hover,
-.collection-name a:hover {
+.collection_title:hover,
+.collection_title a:hover {
   color: #333;
 }
 
-.asset-name {
+.item_name {
   color: #707980;
   font-size: 16px;
   font-weight: 500;
@@ -143,30 +122,34 @@ header#top nav .active {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: -6px 0px 4px 0px;
 }
 
-.asset-name a, .asset-name a:visited {
+.item_name a, .item_name a:visited {
   color: #707980;
   text-decoration: none;
 }
 
-.asset-name:hover,
-.asset-name a:hover {
+.item_name:hover,
+.item_name a:hover {
   color: #333;
 }
 
-section#slides .active {
+#slides .active {
   display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
 }
 
 @media screen and (max-width: 600px) {
-  .asset-name {
+  .item_name {
     font-size: 14px;
   }
-  .collection-name {
+  .collection_title {
     font-size: 12px;
   }
-  .slide {
+  #slides .active {
     grid-template-columns: repeat(2, minmax(140px, 1fr));
     /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
   }
