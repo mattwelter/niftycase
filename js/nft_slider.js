@@ -33,7 +33,7 @@
     let makeNavigation = function(count) {
       let btn, navElem = $(self).find('nav');
 
-      btn = $('<a><</a>')
+      btn = $('<a>←</a>')
         .attr('id', 'btn-prev')
         .click(onPrev);
       navElem.append(btn);
@@ -48,7 +48,7 @@
         navElem.append(btn);
       }
 
-      btn = $('<a>></a>')
+      btn = $('<a>→</a>')
         .attr('id', 'btn-next')
         .click(onNext);
       navElem.append(btn);
