@@ -73,7 +73,7 @@
           // }
 
           return `<div>
-              <img target="_blank" href="${asset.permalink}" src="${asset.image_url}" />
+              <a target="_blank" href="${asset.permalink}" ><img src="${asset.image_url}" /></a>
               <p class="collection_title">
                 <img src="${asset.collection.image_url}" />
                 <a target="_blank" href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
