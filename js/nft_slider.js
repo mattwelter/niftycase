@@ -154,7 +154,7 @@
     // coll_title_len: 15,
     params: {
       offset: 0,
-      limit: 40,
+      limit: 20,
       order_direction: 'desc'
     }
   };

@@ -136,23 +136,24 @@ header#top nav .active {
 }
 
 .asset-name {
-  color: #707980;
+  color: #333;
   font-size: 16px;
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: -8px 0px 8px 0px;
 }
 
 .asset-name a, .asset-name a:visited {
-  color: #707980;
+  color: #333;
   text-decoration: none;
 }
 
 .asset-name:hover,
 .asset-name a:hover {
-  color: #333;
+  color: #8b8b8b;
 }
 
 section#slides .active {
