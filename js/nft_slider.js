@@ -127,7 +127,7 @@
 
       makeNavigation(count);
       makeETHAdress(
-        data.assets[0].owner.address,
+        opts.addr,
         data.assets[0].owner.user.username
       );
       makeSlides(slides);
