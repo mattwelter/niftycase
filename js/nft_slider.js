@@ -25,7 +25,7 @@
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${addr}">${path}</a>`)
+      node = $(`<a href="http://opensea.io/${addr}" target="_blank">${path}</a>`)
         .attr('id', 'ethAddress');
       addrElem.append(node);
     }
