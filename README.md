@@ -5,13 +5,13 @@
 Embed your NFT collection on any website!
 
 # Usage
-## For your website (Github, Wix, Squarespace, etc)
+## Embed on your website (Github, Wix, Squarespace, etc)
 1. Visit [niftycase.io](https://niftycase.io)
 2. Type in your Ethereum wallet address into the input field & click "Generate"
 3. Scroll down and copy the `<iframe>` code under "Code for iframe"
 4. Paste the code inside the HTML code of your website
 5. 
-## For Notion
+## Embed in Notion
 7. Visit [niftycase.io](https://niftycase.io)
 8. Type in your Ethereum wallet address into the input field & click "Generate"
 9. Scroll down and copy the URL under "Embed link for Notion"
