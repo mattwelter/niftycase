@@ -1,0 +1,14 @@
+body {
+  background-color: #333;
+  color: #cecece;
+}
+
+.nft-slider header nav a:hover,
+.nft-slider header nav .active
+{
+  color: #efefef;
+}
+
+.nft-card {
+  background-color: #514d56;
+}

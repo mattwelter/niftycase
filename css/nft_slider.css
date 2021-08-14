@@ -1,6 +1,6 @@
 body {
   font-family: "Inter", san-serif;
-  margin: 0px;
+  /* background-color: white; */
 }
 
 .nft-slider {
@@ -8,87 +8,69 @@ body {
   flex-direction: column;
 }
 
-.ntf-slider header#top {
+.ntf-slider header {
   display: flex;
   flex-direction: row;
   line-height: 24px;
 }
 
-header#top > div {
+.nft-slider header > div {
   display: inline-block;
   margin-top: 4px;
   margin-bottom: 8px;
 }
 
-header#top img {
-  width: 24px;
-  height: auto;
-}
-
-header#top nav {
+.nft-slider header nav
+{
+  display: block;
   text-align: right;
   float: right;
   margin-top: 4px;
+  margin-bottom: 8px;
   letter-spacing: 4px;
   font-size: 18px;
   color: #aaa;
   user-select: none;
 }
 
-header#top nav a {
+.nft-slider header nav a
+{
   padding: 0 2px;
   cursor: pointer;
 }
 
-header#top nav a:hover {
+.nft-slider header nav a:hover,
+.nft-slider header nav .active
+{
   color: #333;
 }
 
-header#top nav .active {
-  color: #333;
-}
-
-#madeBy {
-  font-size: 12px;
-  color: #b0b2bd;
-  text-align: left;
-  margin-top: 0px;
-  margin-left: 8px;
-}
-
-#madeBy a, #madeBy a:visited {
-  color: #b0b2bd;
-}
-
-#madeBy a:hover {
-  color: #8492a2;
-}
-
-#ethAddress, #ethAddress:visited {
+.eth-addr,
+.eth-addr:visited {
   vertical-align: super;
   color: inherit;
   text-decoration: none;
 }
 
-#ethAddress:hover {
+.eth-addr:hover {
   text-decoration: underline;
 }
 
+.eth-logo {
+  width: 24px;
+  height: auto;
+}
+
+
+
+
 .slide {
   display: none;
+  /*overflow-x: scroll;*/
   grid-gap: 0px;
   grid-template-columns: repeat(4, minmax(140px, 1fr));
   /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
 }
-
-/* deprecated
-.slide img {
-  height: auto;
-  width: 100%;
-  min-width: 84px;
-  border-radius: 6px;
-}
-*/
 
 .slide p img {
   width: 20px;
@@ -96,13 +78,13 @@ header#top nav .active {
   min-width: 20px;
   border-radius: 50%;
   margin-bottom: 1px;
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
 .slide > div {
   background-color: #fafafa;
-  margin: 0px 8px 10px;
-  padding: 0.4rem;
+  margin: 0rem 0.4rem 1.2rem;
+  padding: 0.5rem;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
 }
@@ -113,14 +95,18 @@ header#top nav .active {
   overflow: hidden;
 }
 
-.card-img:before {
+.nft-content > .active {
+  display: grid;
+}
+
+.nft-card-img:before {
   content: '';
   display: block;
   width: 100%;
   padding-top: 100%;
 }
 
-.card-img {
+.nft-card-img {
   display: block;
   border-radius: 6px;
   box-sizing: border-box;
@@ -130,51 +116,55 @@ header#top nav .active {
   background-position: center center;
 }
 
+
+
 .collection-name {
+  color: #707980;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: #707980;
 
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.collection-name a, .collection-name a:visited {
+.asset-name {
   color: #707980;
+  font-size: 16px;
+  font-weight: 500;
+  margin: -6px 0px 8px 0px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collection-name a,
+.collection-name a:visited
+{
+  color: #707980;
+  text-decoration: none;
+}
+
+.asset-name a,
+.asset-name a:visited
+{
+  color: #333;
   text-decoration: none;
 }
 
 .collection-name:hover,
-.collection-name a:hover {
-  color: #333;
-}
-
-.asset-name {
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin: -8px 0px 8px 0px;
-}
-
-.asset-name a, .asset-name a:visited {
-  color: #333;
-  text-decoration: none;
-}
-
+.collection-name a:hover,
 .asset-name:hover,
-.asset-name a:hover {
-  color: #8b8b8b;
+.asset-name a:hover
+{
+  color: #333;
 }
 
-section#slides .active {
-  display: grid;
-}
+
+
+
 
 @media screen and (max-width: 600px) {
   .asset-name {

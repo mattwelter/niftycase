@@ -10,6 +10,12 @@
     return result;
   }
 
+  function getQueryString(params) {
+    return Object.keys(params).map(k => {
+      return `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`;
+    }).join('&');
+  }
+
   $.fn.nftSlider = function(options) {
     let self = this;
     let curr = 0, count = 0, slides = [];
@@ -18,15 +24,15 @@
     if (!opts.target) {
       const urlSearchParams = new URLSearchParams(window.location.search);
       const params = Object.fromEntries(urlSearchParams.entries());
-      opts = $.extend({}, params, { target: this.attr('data-addr') }, opts);
+      opts = $.extend({}, params, { addr: this.attr('data-addr') }, opts);
     }
 
-    let makeETHAdress = function(addr, username) {
+    let makeETHAdress = function(addr) {
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${addr}" target="_blank">${path}</a>`)
-        .attr('id', 'ethAddress');
+      node = $(`<a href="http://opensea.io/${addr}">${path}</a>`)
+        .addClass('eth-addr');
       addrElem.append(node);
     }
 
@@ -55,32 +61,22 @@
     };
 
     let makeSlides = function(slides) {
-      let html = '', slidesElem = $(self).find('#slides');
+      let html = '', slidesElem = $(self).find('.nft-content');
       slides.forEach((item,i) => {
-        html += `<div id="slide-${i}" class="flex-container slide ${i === 0 ? 'active' : ''}">`;
+        html += `<div id="slide-${i}" class="slide ${i === 0 ? 'active' : ''}">`;
         html += item.map(asset => {
 
           let asset_name = asset.name || 'Untitled';
-          // if (asset_name.length > opts.asset_title_len) { // maybe use css
-          //   asset_name = asset_name.substring(
-          //     0, Math.min(opts.asset_title_len-1, asset_name.length)) + '…';
-          // }
-
           let collection_name = asset.collection.name || 'Untitled';
-          // if (collection_name.length > opts.coll_title_len) { // maybe use css
-          //   collection_name = collection_name.substring(
-          //     0, Math.min(opts.coll_title_len, collection_name.length)) + '…';
-          // }
 
           return `<div>
-<div class="card-img" style="background-image: url(${asset.image_url});"></div>
-<!--              <img href="https://opensea.io/${asset.collection.slug}" src="${asset.image_url}" target="_blank"/> -->
+              <div class="nft-card-img" style="background-image: url(${asset.image_url || ''});"></div>
               <p class="collection-name">
-                <img src="${asset.collection.image_url}" />
-                <a href="https://opensea.io/${asset.collection.slug}" target="_blank">${collection_name}</a>
+                <img src="${asset.collection.image_url || ''}" onerror="this.style.display='none'" />
+                <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
               </p>
               <p class="asset-name">
-                <a href="${asset.permalink}" target="_blank">${asset_name}</a>
+                <a href="${asset.permalink}">${asset_name}</a>
               </p>
             </div>`;
         }).join('');
@@ -97,7 +93,7 @@
 
       if (curr !== id) {
         $(self).find('.active').toggleClass('active');
-        $(target).toggleClass('active');
+        $(self).find(target).toggleClass('active');
         $(self).find(`[data-target="${target}"]`).toggleClass('active');
         curr = id;
       }
@@ -122,24 +118,19 @@
     };
 
     let onSuccess = function(data) {
-      slides = splitToSlices(data.assets);
+      slides = splitToSlices(data.assets); // maybe private
       count = slides.length;
 
       makeNavigation(count);
-      makeETHAdress(
-        opts.addr,
-        data.assets[0].owner.user.username
-      );
       makeSlides(slides);
     };
 
     if (opts.addr) {
+      makeETHAdress(opts.addr);
       let params = $.extend({}, opts.params, { owner: opts.addr });
-      let qs = Object.keys(params).map(key => {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
-      }).join('&');
+      let qs = getQueryString(params);
       $.ajax({
-        url: API_URL + '?' + qs,
+        url: API_URL + (qs ? '?' + qs : ''),
         success: onSuccess
       });
     } else {
@@ -150,8 +141,6 @@
   };
 
   $.fn.nftSlider.defaults = {
-    // asset_title_len: 18,
-    // coll_title_len: 15,
     params: {
       offset: 0,
       limit: 20,
