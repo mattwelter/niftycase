@@ -1,3 +1,4 @@
+![](https://i.imgur.com/IXe7XBX.png)
 # Niftycase – Embedded NFT Gallery
 ![](https://img.shields.io/github/last-commit/mattwelter/niftycase)
 ![](https://img.shields.io/twitter/follow/_mattwelter?label=Check%20for%20updates&style=social)
