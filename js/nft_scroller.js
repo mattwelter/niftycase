@@ -25,7 +25,9 @@
       assets.forEach((asset, i) => {
         elem.append($(`
           <div class="nft-card">
-            <div class="nft-card-img" style="background-image: url(${asset.image_url})"></div>
+            <a href="${asset.permalink}" target="_blank">
+              <div class="nft-card-img" style="background-image: url(${asset.image_url})"></div>
+            </a>
             <section>
               <a href="https://opensea.io/${asset.collection.slug}" target="_blank"><img src="${asset.collection.image_url || ''}" onerror="this.style.display='none'" /></a>
               <a class="nft-card-title" href="https://opensea.io/${asset.collection.slug}" target="_blank">${asset.collection.name || 'Untitled'}</a>

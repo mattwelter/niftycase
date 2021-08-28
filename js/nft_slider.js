@@ -70,13 +70,15 @@
           let collection_name = asset.collection.name || 'Untitled';
 
           return `<div>
-              <div class="nft-card-img" style="background-image: url(${asset.image_url || ''});"></div>
+              <a href="${asset.permalink}" target="_blank">
+                <div class="nft-card-img" style="background-image: url(${asset.image_url || ''});"></div>
+              </a>
               <p class="collection-name">
                 <img src="${asset.collection.image_url || ''}" onerror="this.style.display='none'" />
                 <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
               </p>
               <p class="asset-name">
-                <a href="${asset.permalink}">${asset_name}</a>
+                <a href="${asset.permalink}" target="_blank">${asset_name}</a>
               </p>
             </div>`;
         }).join('');
