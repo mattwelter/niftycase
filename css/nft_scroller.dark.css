@@ -1,34 +1,33 @@
-body {
-  background-color: #2c2c2f;
-  color: #cecece;
+.eth-addr {
+	font-size: 15px;
 }
 
-.nft-content {
-  background-color: #1c1c1f;
+.eth-logo {
+	width: 22px;
+}
+#nft-slider-1 {
+	background: #f7f9f9;
+	border-top: 1px solid #dadada;
 }
 
-.nft-card {
-  background-color: #514d56;
+#nft-slider-1 header {
+	padding: 0.4rem 0rem 0.6rem 0.6rem;
+	padding: 12px 0px 4px 13px;
 }
 
-.nft-card-title,
-.nft-card-title:visited
-{
-  color: #aaa;
+.made-by, .made-by a, .made-by a:visited {
+	margin: 0px;
+	padding: 8px 16px;
+	background: white;
 }
 
-.nft-card-subtitle,
-.nft-card-subtitle:visited
-{
-  color: #fff !important;
+.nft-card-title, .nft-card-title:visited {
+	font-size: 12px;
+    letter-spacing: 0.4px;
 }
 
-.nft-card-title:hover,
-.nft-card-subtitle:hover
-{
-  color: #efefef;
-}
-
-.nft-card img {
-  background-color: #2c2c2f;
+.nft-card-subtitle, .nft-card-subtitle:visited {
+	font-size: 15px;
+	letter-spacing: 0px;
+	color: #000000 !important;
 }

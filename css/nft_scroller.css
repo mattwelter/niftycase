@@ -78,6 +78,7 @@ body {
   /* flex: 1 1 0; */
   min-width: max(min(15vw, 216px), 144px);
   animation: append-animate .4s ease-in-out;
+  background: white;
 
 
 position: relative;
