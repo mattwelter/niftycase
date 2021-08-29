@@ -15,10 +15,14 @@
 	padding: 12px 0px 4px 13px;
 }
 
-.made-by, .made-by a, .made-by a:visited {
+.made-by {
 	margin: 0px;
 	padding: 8px 0px 8px 16px;
 	background: white;
+}
+
+.made-by a, .made-by a:visited {
+	padding: 0px;
 }
 
 .nft-card-title, .nft-card-title:visited {
