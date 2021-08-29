@@ -1,3 +1,7 @@
+body {
+	font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 .eth-addr {
 	font-size: 15px;
 }
@@ -22,6 +26,7 @@
 }
 
 .made-by a, .made-by a:visited {
+	margin: 0px;
 	padding: 0px;
 }
 
