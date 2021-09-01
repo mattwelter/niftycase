@@ -32,7 +32,7 @@
               <a href="https://opensea.io/${asset.collection.slug}" target="_blank"><img src="${asset.collection.image_url || ''}" onerror="this.style.display='none'" /></a>
               <a class="nft-card-title" href="https://opensea.io/${asset.collection.slug}" target="_blank">${asset.collection.name || 'Untitled'}</a>
             </section>
-            <a class="nft-card-subtitle" href="${asset.permalink}}" target="_blank">${asset.name || 'Untitled'}</a>
+            <a class="nft-card-subtitle" href="${asset.permalink}" target="_blank">${asset.name || 'Untitled'}</a>
           </div>
         `));
       });
