@@ -2,9 +2,171 @@ body {
 	font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+.hide {
+	display: none !important;
+}
+
 .eth-addr {
 	font-size: 15px;
 	color: rgb(83, 100, 113);
+}
+
+.tabs {
+	float: right;
+	margin-top: 4px;
+	font-size: 15px;
+	color: rgb(83, 100, 113);
+}
+
+.tabs a {
+    margin: 0px 24px 0px 0px;
+    font-weight: 600;
+    padding-top: 13px;
+    cursor: pointer;
+}
+
+#tabs-nftactivity, #tabs-nfts {
+	transition: 0.125s ease;
+}
+
+#tabs-nftactivity:hover, #tabs-nfts:hover {
+	opacity: 0.35;
+}
+
+.activeTab {
+	color: #000;
+	font-weight: 700 !important;
+	border-top: 4px solid #1DA1F2;
+}
+
+.eventDate {
+	font-size: 12px;
+	letter-spacing: 0.4px;
+	display: inline-block;
+	margin-top: 14px;
+	color: #abb1b5;
+
+}
+
+.nftactivity-card {
+	height: 197px;
+    display: inline-block;
+    width: max(min(15vw, 216px), 144px);
+    margin: 0.6rem 0.4rem 1.24rem;
+    padding: 0.5rem 0.5rem 1.1rem;
+    border-radius: 7px;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
+
+    /* flex: 1 1 0; */
+    min-width: max(min(15vw, 216px), 144px);
+    animation: append-animate .4s ease-in-out;
+    background: white;
+    position: relative;	
+}
+
+.nftactivity-card-img {
+	transition: 0.125s ease;
+}
+
+p.nameInsideImage {
+	font-size: 12px;
+    background-color: #6868698a;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    padding: 3px 6px;
+    margin-top: -21px;
+    border-radius: 0px 0px 8px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    backdrop-filter: blur(8px);
+}
+
+.imageAnchor {
+	text-decoration: none;
+}
+
+.nftactivity-card-img:hover, .nftactivity-card-img img {
+	opacity: 0.35;
+}
+
+.nftActivity-card-title {
+	margin-left: 0px;
+	font-size: 12px;
+	letter-spacing: 0.3px;
+	line-height: 24px;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-block-start: 0.64rem;
+	margin-block-end: 0.64rem;
+	margin-top: 6px;
+	color: #707980;
+	font-weight: 500;
+	text-decoration: none;
+	transition: 0.125s ease;
+}
+
+.nftActivity-card-title:hover {
+	opacity: 0.35;
+}
+
+.selling, .selling:hover, .selling:visited {
+	background: #fff1aa;
+	color: #654d08 !important;
+    padding: 0px 4px;
+    border-radius: 2px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 14px;
+    transition: 0.125s ease;
+}
+
+.purchased, .purchased:hover, .purchased:visited {
+	background: #d1ff8a;
+	color: #055600 !important;
+    padding: 0px 4px;
+    border-radius: 2px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 14px;
+    transition: 0.125s ease;
+}
+
+.sold, .sold:hover, .sold:visited {
+	background: #ffdfdf;
+	color: #ce0037 !important;
+    padding: 0px 4px;
+    border-radius: 2px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 14px;
+    transition: 0.125s ease;
+}
+
+.transferred, .transferred:hover, .transferred:visited {
+	background: lightblue;
+	color: blue !important;
+    padding: 0px 4px;
+    border-radius: 2px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 14px;
+    transition: 0.125s ease;
+}
+
+.transferred:hover, .selling:hover, .sold:hover, .purchased:hover {
+	opacity: 0.35;
 }
 
 .eth-logo {
@@ -39,5 +201,5 @@ body {
 .nft-card-subtitle, .nft-card-subtitle:visited {
 	font-size: 15px;
 	letter-spacing: 0px;
-	color: #000000 !important;
+	color: #000000;
 }

@@ -1,4 +1,7 @@
 {
   "name": "Niftycase",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }
