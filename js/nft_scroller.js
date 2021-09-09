@@ -60,7 +60,6 @@
         .then(response => response.json())
         .then(response => {
           // console.log(response);
-          console.log(response)
           var assets = response.asset_events.length;
           for (var i = 0; i < assets; i++) {
             let eventType       = response.asset_events[i].event_type       /*  Returns "created" for new auctions, "successful" for sales, "cancelled", "bid_entered", "bid_withdrawn", "transfer", or "approve"  */
@@ -79,65 +78,52 @@
             }
 
             let eventDate       = response.asset_events[i].created_date     /*  Returns "2021-08-28T21:29:01.029737"  */
-            console.log(eventDate);
             const dateTime = moment(eventDate, "YYYY-MM-DDTh:mm:ss").utcOffset(0, true).fromNow();
-            console.log(dateTime);
 
             const fixPrice = function(assetPrice) {
               if (response.asset_events[i].ending_price != null) {
                 let assetPrice = response.asset_events[i].ending_price
-                console.log(assetPrice)
                 let price;
 
                 if (assetPrice.length == 20) {
                   let price = assetPrice.substring(0, assetPrice.length - 15);
-                  console.log(price)
                   price = price.substring(0, 2) + "." + price.substring(3, price.length);
-                  console.log(price)
                   return price;
                 }
 
                 if (assetPrice.length == 19) {
                   let price = assetPrice.substring(0, assetPrice.length - 15);
-                  console.log(price)
                   price = price.substring(0, 1) + "." + price.substring(1, price.length);
-                  console.log(price)
                   return price;
                 }
 
                 if (assetPrice.length == 18) {
                   let price = assetPrice.substring(0, assetPrice.length - 15);
-                  console.log(price)
                   price = "0." + price.substring(0, price.length);
-                  console.log(price)
                   return price;
                 }
 
                 if (assetPrice.length == 17) {
                   let price = assetPrice.substring(0, assetPrice.length - 15);
-                  console.log(price)
                   price = "0.0" + price.substring(0, price.length);
-                  console.log(price)
                   return price;
                 }
 
                 if (assetPrice.length == 16) {
                   let price = assetPrice.substring(0, assetPrice.length - 15);
-                  console.log(price)
                   price = "0.00" + price.substring(0, price.length);
-                  console.log(price)
                   return price;
                 }
               }
             }
 
-            console.log(`
+            /*console.log(`
               Event type: ${eventType}\n
               Event date: ${eventDate}\n
               Asset name: ${assetName}\n
               Asset link: ${assetLink}\n
               Image link: ${assetImage}\n
-              `);
+              `);*/
           // Add usernames to array
           let elem = document.body;
           let tabs, tabSection = $(self).find('section.nft-content');
@@ -233,12 +219,10 @@
         for(var i = 0; i < nftCards.length; i++)
         {
             nftCards[i].classList.remove('hide');
-            console.log(nftCards[i].className);
         }
         for(var i = 0; i < activityCards.length; i++)
         {
             activityCards[i].classList.add('hide');
-            console.log(activityCards[i].className);
         }
       });
 
@@ -248,12 +232,10 @@
         for(var i = 0; i < nftCards.length; i++)
         {
             nftCards[i].classList.add('hide');
-            console.log(nftCards[i].className);
         }
         for(var i = 0; i < activityCards.length; i++)
         {
             activityCards[i].classList.remove('hide');
-            console.log(activityCards[i].className);
         }
       });
 
