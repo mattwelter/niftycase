@@ -56,7 +56,7 @@
 
     let requestActivity = function(addr) {
       const options = {method: 'GET', headers: {Accept: 'application/json'}};
-      fetch(`https://api.opensea.io/api/v1/events?account_address=${addr}&only_opensea=false&offset=0&limit=20`, options)
+      fetch(`https://api.opensea.io/api/v1/events?account_address=${addr}&only_opensea=false&offset=0&limit=50`, options)
         .then(response => response.json())
         .then(response => {
           // console.log(response);
@@ -128,7 +128,8 @@
           let elem = document.body;
           let tabs, tabSection = $(self).find('section.nft-content');
 
-          if (eventType == "successful") {
+
+          if ((eventType == "successful") && (response.asset_events[i].winner_account.address != addr.toLowerCase())) {
             let eventType = "Sold";
             let tabs = $(`
             <div>
@@ -144,7 +145,7 @@
           };
 
           if (eventType == "created") {
-            let eventType = "Selling";
+            let eventType = "Listed";
             let price = fixPrice(response.asset_events[i].ending_price);
             let paymentToken = getPaymentToken();
             let tabs = $(`
@@ -160,7 +161,8 @@
             tabSection.append(tabs);
           };
 
-          if ((eventType == "transfer") && (response.asset_events[i].from_account.address == "0x0000000000000000000000000000000000000000")){
+
+          if ((eventType == "transfer") && (response.asset_events[i].from_account.address != "0x0000000000000000000000000000000000000000") && (response.asset_events[i].asset.num_sales > 0) && (response.asset_events[i].to_account.address == addr.toLowerCase())){
             let eventType = "Purchased";
               let tabs = $(`
               <div>
@@ -174,6 +176,27 @@
               `).addClass('nftactivity-card hide');
             tabSection.append(tabs);
           };
+
+          try {
+            if ((eventType == "transfer") && (response.asset_events[i].from_account.address == "0x0000000000000000000000000000000000000000") && (response.asset_events[i].transaction.from_account.address == response.asset_events[i].to_account.address) && (response.asset_events[i].to_account.address == addr.toLowerCase())){
+              let eventType = "Minted";
+              console.log("BRO")
+                let tabs = $(`
+                <div>
+                  <a href="${assetLink}" target="_blank" class="imageAnchor">
+                    <div class="nft-card-img nftactivity-card-img" style="background-image: url(${assetImage || backupImage})"></div>
+                    <p class="nameInsideImage">${assetName || colllectionName + " " + assetId}</p>
+                  </a>
+                  <a href="${assetLink}" target="_blank" class="nft-card-subtitle minted">${eventType}</a>
+                  <a class="eventDate">${dateTime}</a>
+                </div>
+                `).addClass('nftactivity-card hide');
+              tabSection.append(tabs);
+            };
+          } catch (error) {
+            console.error(error)
+          }
+        
          }
       })
       .catch(err => console.error(err));

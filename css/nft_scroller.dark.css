@@ -113,56 +113,74 @@ p.nameInsideImage {
 	opacity: 0.35;
 }
 
-.selling, .selling:hover, .selling:visited {
-	background: #fff1aa;
-	color: #654d08 !important;
-    padding: 0px 4px;
-    border-radius: 2px;
-    width: fit-content;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 14px;
-    transition: 0.125s ease;
+.selling, .selling:visited {
+  background: #fff1aa;
+  color: #654d08 !important;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 10px !important;
+  display: block;
+  transition: 0.125s ease;
 }
 
-.purchased, .purchased:hover, .purchased:visited {
-	background: #d1ff8a;
-	color: #055600 !important;
-    padding: 0px 4px;
-    border-radius: 2px;
-    width: fit-content;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 14px;
-    transition: 0.125s ease;
+.purchased, .purchased:visited {
+  background: #dfecff;
+  color: #3745ff !important;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 10px !important;
+  display: block;
+  transition: 0.125s ease;
 }
 
-.sold, .sold:hover, .sold:visited {
-	background: #ffdfdf;
-	color: #ce0037 !important;
-    padding: 0px 4px;
-    border-radius: 2px;
-    width: fit-content;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 14px;
-    transition: 0.125s ease;
+.minted, .minted:visited {
+  background: #d1ff8a;
+  color: #055600 !important;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 10px !important;
+  display: block;
+  transition: 0.125s ease;
 }
 
-.transferred, .transferred:hover, .transferred:visited {
-	background: lightblue;
-	color: blue !important;
-    padding: 0px 4px;
-    border-radius: 2px;
-    width: fit-content;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 14px;
-    transition: 0.125s ease;
+.sold, .sold:visited {
+  background: #ffdfdf;
+  color: #ce0037 !important;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 10px !important;
+  display: block;
+  transition: 0.125s ease;
+}
+
+.transferred, .transferred:visited {
+  background: lightblue;
+  color: blue !important;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 10px !important;
+  display: block;
+  transition: 0.125s ease;
 }
 
 .transferred:hover, .selling:hover, .sold:hover, .purchased:hover {
