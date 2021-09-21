@@ -9,6 +9,16 @@
     }).join('&');
   }
 
+  if ((document.getElementById("eth-logo").src = "media/eth.png") && (window.location.href.indexOf("dm") > -1)) {
+    console.log("gang gang gang i live a lifestyle")
+    document.getElementById("eth-logo").src = "media/eth2.png"
+  }
+
+  if ((document.getElementById("eth-logo").src = "media/eth2.png") && (window.location.href.indexOf("dark") > -1)) {
+    console.log("nah")
+    document.getElementById("eth-logo").src = "media/eth.png"
+  }
+
   $.fn.nftScroller = function(options) {
     const limit = 10; // <= 50
     let self = this, loading = false, pointer = 0;
@@ -29,8 +39,8 @@
               <div class="nft-card-img" style="background-image: url(${asset.image_url || asset.collection.image_url})"></div>
             </a>
             <section>
-              <a href="https://opensea.io/${asset.collection.slug}" target="_blank"><img src="${asset.collection.image_url || asset.image_url}" onerror="this.style.display='none'" /></a>
-              <a class="nft-card-title" href="https://opensea.io/${asset.collection.slug}" target="_blank">${asset.collection.name || 'Untitled'}</a>
+              <a href="https://opensea.io/collection/${asset.collection.slug}" target="_blank"><img src="${asset.collection.image_url || asset.image_url}" onerror="this.style.display='none'" /></a>
+              <a class="nft-card-title" href="https://opensea.io/collection/${asset.collection.slug}" target="_blank">${asset.collection.name || 'Untitled'}</a>
             </section>
             <a class="nft-card-subtitle" href="${asset.permalink}" target="_blank">${asset.name || "#" + asset.token_id || 'Untitled'}</a>
           </div>

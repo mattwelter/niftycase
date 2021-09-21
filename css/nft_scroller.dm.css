@@ -8,7 +8,7 @@ body {
 
 .eth-addr {
 	font-size: 15px;
-	color: white !important;
+	color: #eaeaea !important;
 }
 
 .tabs {
@@ -31,6 +31,10 @@ body {
 
 #tabs-nftactivity:hover, #tabs-nfts:hover {
 	opacity: 0.35;
+}
+
+.nft-card {
+  background: #424346;
 }
 
 .activeTab {
@@ -60,7 +64,7 @@ body {
     /* flex: 1 1 0; */
     min-width: max(min(15vw, 216px), 144px);
     animation: append-animate .4s ease-in-out;
-    background: white;
+    background: #424346;
     position: relative;	
 }
 
@@ -114,7 +118,7 @@ p.nameInsideImage {
 }
 
 .selling, .selling:visited {
-  background: #fff1aa;
+  background: #ffec8b;
   color: #654d08 !important;
   padding: 0px 4px;
   border-radius: 2px;
@@ -201,23 +205,26 @@ p.nameInsideImage {
 }
 
 .made-by {
+  color: #818388;
 	margin: 0px;
 	padding: 8px 0px 8px 16px;
-	background: white;
+	background: rgb(21, 24, 28);
 }
 
 .made-by a, .made-by a:visited {
 	margin: 0px;
 	padding: 0px;
+  color: #818388;
 }
 
 .nft-card-title, .nft-card-title:visited {
 	font-size: 12px;
-    letter-spacing: 0.4px;
+  letter-spacing: 0.4px;
+  color: #ddd;
 }
 
 .nft-card-subtitle, .nft-card-subtitle:visited {
 	font-size: 15px;
 	letter-spacing: 0px;
-	color: #000000;
+	color: white;
 }

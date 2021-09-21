@@ -127,7 +127,7 @@ position: relative;
 .nft-card-subtitle,
 .nft-card-subtitle:visited
 {
-  color: #333 !important;
+  color: #333;
   font-weight: 500;
   margin: -8px 0px;
 }
