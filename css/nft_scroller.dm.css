@@ -34,7 +34,7 @@ body {
 }
 
 .nft-card {
-  background: #424346;
+  background: #2b2c2f;
 }
 
 .activeTab {
@@ -64,7 +64,7 @@ body {
     /* flex: 1 1 0; */
     min-width: max(min(15vw, 216px), 144px);
     animation: append-animate .4s ease-in-out;
-    background: #424346;
+    background: #2b2c2f;
     position: relative;	
 }
 
