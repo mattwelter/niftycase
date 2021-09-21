@@ -10,12 +10,10 @@
   }
 
   if ((document.getElementById("eth-logo").src = "media/eth.png") && (window.location.href.indexOf("dm") > -1)) {
-    console.log("gang gang gang i live a lifestyle")
     document.getElementById("eth-logo").src = "media/eth2.png"
   }
 
   if ((document.getElementById("eth-logo").src = "media/eth2.png") && (window.location.href.indexOf("dark") > -1)) {
-    console.log("nah")
     document.getElementById("eth-logo").src = "media/eth.png"
   }
 
@@ -190,7 +188,6 @@
           try {
             if ((eventType == "transfer") && (response.asset_events[i].from_account.address == "0x0000000000000000000000000000000000000000") && (response.asset_events[i].transaction.from_account.address == response.asset_events[i].to_account.address) && (response.asset_events[i].to_account.address == addr.toLowerCase())){
               let eventType = "Minted";
-              console.log("BRO")
                 let tabs = $(`
                 <div>
                   <a href="${assetLink}" target="_blank" class="imageAnchor">
