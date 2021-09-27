@@ -9,15 +9,16 @@
     }).join('&');
   }
 
-  if ((document.getElementById("eth-logo").src = "media/eth.png") && (window.location.href.indexOf("dm") > -1)) {
+  if (window.location.href.indexOf("dm") > -1) {
     document.getElementById("eth-logo").src = "media/eth2.png"
   }
 
-  if ((document.getElementById("eth-logo").src = "media/eth2.png") && (window.location.href.indexOf("dark") > -1)) {
+  if (window.location.href.indexOf("dark") > -1) {
+    console.log("eeeee")
     document.getElementById("eth-logo").src = "media/eth.png"
   }
 
-  if ((document.getElementById("eth-logo").src = "media/eth2.png" || "media/eth.png") && (window.location.href.indexOf("darker") > -1)) {
+  if (window.location.href.indexOf("darker") > -1) {
     document.getElementById("eth-logo").src = "media/eth2.png"
   }
 
