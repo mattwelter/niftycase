@@ -17,6 +17,10 @@
     document.getElementById("eth-logo").src = "media/eth.png"
   }
 
+  if ((document.getElementById("eth-logo").src = "media/eth2.png" || "media/eth.png") && (window.location.href.indexOf("darker") > -1)) {
+    document.getElementById("eth-logo").src = "media/eth2.png"
+  }
+
   $.fn.nftScroller = function(options) {
     const limit = 10; // <= 50
     let self = this, loading = false, pointer = 0;

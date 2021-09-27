@@ -34,7 +34,7 @@ body {
 }
 
 .nft-card {
-  background: #2b2c2f;
+  background: #15202b;
 }
 
 .activeTab {
@@ -64,7 +64,7 @@ body {
     /* flex: 1 1 0; */
     min-width: max(min(15vw, 216px), 144px);
     animation: append-animate .4s ease-in-out;
-    background: #2b2c2f;
+    background: #15202b;
     position: relative;	
 }
 
@@ -195,7 +195,7 @@ p.nameInsideImage {
 	width: 22px;
 }
 #nft-slider-1 {
-	background: rgb(21, 24, 28);
+	background: #192734;
 	border-top: 1px solid #333;
 }
 
@@ -208,7 +208,7 @@ p.nameInsideImage {
   color: #818388;
 	margin: 0px;
 	padding: 8px 0px 8px 16px;
-	background: rgb(21, 24, 28);
+	background: #192734;
 }
 
 .made-by a, .made-by a:visited {
