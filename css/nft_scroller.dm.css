@@ -34,7 +34,7 @@ body {
 }
 
 .nft-card {
-  background: #15202b;
+  background: #2a3948;
 }
 
 .activeTab {
@@ -208,7 +208,7 @@ p.nameInsideImage {
   color: #818388;
 	margin: 0px;
 	padding: 8px 0px 8px 16px;
-	background: #192734;
+	background: #15202b;
 }
 
 .made-by a, .made-by a:visited {
