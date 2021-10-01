@@ -9,11 +9,14 @@
     }).join('&');
   }
 
-  if (window.location.href.indexOf("dm") > -1) {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+
+  if ((params.eth_icon && params.eth_icon === "1") || window.location.href.indexOf("dm") > -1) {
     document.getElementById("eth-logo").src = "media/eth2.png"
   }
 
-  if (window.location.href.indexOf("dark") > -1) {
+  if ((params.eth_icon && params.eth_icon === "2") || window.location.href.indexOf("dark") > -1) {
     console.log("eeeee")
     document.getElementById("eth-logo").src = "media/eth.png"
   }
@@ -28,24 +31,27 @@
     let opts = $.extend({}, $.fn.nftScroller.defaults, options);
 
     if (!opts.target) {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const params = Object.fromEntries(urlSearchParams.entries());
       opts = $.extend({}, params, { addr: this.attr('data-addr') }, opts);
     }
+
+    const cardColor = !params.bg_card ? false : color_regexp.test(params.bg_card) ? params.bg_card : false
+    const collectionNameColor = !params.collection_name_color ? false : color_regexp.test(params.collection_name_color) ? params.collection_name_color : false
+    const assetNameColor = !params.asset_name_color ? false : color_regexp.test(params.asset_name_color) ? params.asset_name_color : false;
+    const addrColor = !params.addr_color ? false : color_regexp.test(params.addr_color) ? params.addr_color : false
 
     let makeCards = function(assets) {
       let elem = $(self).find('.nft-content');
       assets.forEach((asset, i) => {
         elem.append($(`
-          <div class="nft-card">
+          <div class="nft-card" ${cardColor && `style="background: #${cardColor}"`}>
             <a href="${asset.permalink}" target="_blank">
               <div class="nft-card-img" style="background-image: url(${asset.image_url || asset.collection.image_url})"></div>
             </a>
             <section>
               <a href="https://opensea.io/collection/${asset.collection.slug}" target="_blank"><img src="${asset.collection.image_url || asset.image_url}" onerror="this.style.display='none'" /></a>
-              <a class="nft-card-title" href="https://opensea.io/collection/${asset.collection.slug}" target="_blank">${asset.collection.name || 'Untitled'}</a>
+              <a class="nft-card-title" href="https://opensea.io/collection/${asset.collection.slug}" target="_blank" ${collectionNameColor && `style="color: #${collectionNameColor}"`}>${asset.collection.name || 'Untitled'}</a>
             </section>
-            <a class="nft-card-subtitle" href="${asset.permalink}" target="_blank">${asset.name || "#" + asset.token_id || 'Untitled'}</a>
+            <a class="nft-card-subtitle" href="${asset.permalink}" target="_blank" ${assetNameColor && `style="color: #${assetNameColor}"`}>${asset.name || "#" + asset.token_id || 'Untitled'}</a>
           </div>
         `));
       });
@@ -55,7 +61,7 @@
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${addr}" target="_blank">${path}</a>`)
+      node = $(`<a href="http://opensea.io/${addr}" target="_blank" ${addrColor && `style="color: #${addrColor} !important"`}>${path}</a>`)
         .addClass('eth-addr');
       addrElem.append(node);
     };
@@ -145,7 +151,7 @@
           if ((eventType == "successful") && (response.asset_events[i].winner_account.address != addr.toLowerCase())) {
             let eventType = "Sold";
             let tabs = $(`
-            <div>
+            ${!cardColor ? "<div>" : `<div style="background: #${cardColor}">`}
               <a href="${assetLink}" target="_blank" class="imageAnchor">
                 <div class="nft-card-img nftactivity-card-img" style="background-image: url(${assetImage || backupImage})"></div>
                 <p class="nameInsideImage">${assetName || colllectionName + " " + assetId}</p>
@@ -162,7 +168,7 @@
             let price = fixPrice(response.asset_events[i].ending_price);
             let paymentToken = getPaymentToken();
             let tabs = $(`
-              <div>
+              ${!cardColor ? "<div>" : `<div style="background: #${cardColor}">`}
                 <a href="${assetLink}" target="_blank" class="imageAnchor">
                   <div class="nft-card-img nftactivity-card-img" style="background-image: url(${assetImage || backupImage})"></div>
                   <p class="nameInsideImage">${assetName || colllectionName + " " + assetId}</p>
@@ -178,7 +184,7 @@
           if ((eventType == "transfer") && (response.asset_events[i].from_account.address != "0x0000000000000000000000000000000000000000") && (response.asset_events[i].asset.num_sales > 0) && (response.asset_events[i].to_account.address == addr.toLowerCase())){
             let eventType = "Purchased";
               let tabs = $(`
-              <div>
+              ${!cardColor ? "<div>" : `<div style="background: #${cardColor}">`}
                 <a href="${assetLink}" target="_blank" class="imageAnchor">
                   <div class="nft-card-img nftactivity-card-img" style="background-image: url(${assetImage || backupImage})"></div>
                   <p class="nameInsideImage">${assetName || colllectionName + " " + assetId}</p>
@@ -194,7 +200,7 @@
             if ((eventType == "transfer") && (response.asset_events[i].from_account.address == "0x0000000000000000000000000000000000000000") && (response.asset_events[i].transaction.from_account.address == response.asset_events[i].to_account.address) && (response.asset_events[i].to_account.address == addr.toLowerCase())){
               let eventType = "Minted";
                 let tabs = $(`
-                <div>
+                ${!cardColor ? "<div>" : `<div style="background: #${cardColor}">`}
                   <a href="${assetLink}" target="_blank" class="imageAnchor">
                     <div class="nft-card-img nftactivity-card-img" style="background-image: url(${assetImage || backupImage})"></div>
                     <p class="nameInsideImage">${assetName || colllectionName + " " + assetId}</p>

@@ -21,17 +21,23 @@
     let curr = 0, count = 0, slides = [];
     let opts = $.extend({}, $.fn.nftSlider.defaults, options);
 
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
     if (!opts.target) {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const params = Object.fromEntries(urlSearchParams.entries());
       opts = $.extend({}, params, { addr: this.attr('data-addr') }, opts);
     }
+
+    const cardColor = !params.bg_card ? false : color_regexp.test(params.bg_card) ? params.bg_card : false
+    const collectionNameColor = !params.collection_name_color ? false : color_regexp.test(params.collection_name_color) ? params.collection_name_color : false
+    const assetNameColor = !params.asset_name_color ? false : color_regexp.test(params.asset_name_color) ? params.asset_name_color : false;
+    const addrColor = !params.addr_color ? false : color_regexp.test(params.addr_color) ? params.addr_color : false
 
     let makeETHAdress = function(addr) {
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
         addr.substring(addr.length - 4);
-      node = $(`<a href="http://opensea.io/${addr}" target="_blank">${path}</a>`)
+      node = $(`<a href="http://opensea.io/${addr}" target="_blank" ${addrColor && `style="color: #${addrColor}"`}>${path}</a>`)
         .addClass('eth-addr');
       addrElem.append(node);
     }
@@ -39,7 +45,7 @@
     let makeNavigation = function(count) {
       let btn, navElem = $(self).find('nav');
 
-      btn = $('<a>←</a>')
+      btn = $(`<a>←</a>`)
         .attr('id', 'btn-prev')
         .click(onPrev);
       navElem.append(btn);
@@ -54,7 +60,7 @@
         navElem.append(btn);
       }
 
-      btn = $('<a>→</a>')
+      btn = $(`<a>→</a>`)
         .attr('id', 'btn-next')
         .click(onNext);
       navElem.append(btn);
@@ -69,16 +75,16 @@
           let asset_name = asset.name || 'Untitled';
           let collection_name = asset.collection.name || 'Untitled';
 
-          return `<div>
+          return `${!cardColor ? "<div>" : `<div style="background: #${cardColor}">`}
               <a href="${asset.permalink}" target="_blank">
                 <div class="nft-card-img" style="background-image: url(${asset.image_url || ''});"></div>
               </a>
               <p class="collection-name">
                 <img src="${asset.collection.image_url || ''}" onerror="this.style.display='none'" />
-                <a href="https://opensea.io/${asset.collection.slug}">${collection_name}</a>
+                <a href="https://opensea.io/${asset.collection.slug}" ${collectionNameColor && `style="color: #${collectionNameColor}"`}>${collection_name}</a>
               </p>
               <p class="asset-name">
-                <a href="${asset.permalink}" target="_blank">${asset_name}</a>
+                <a href="${asset.permalink}" target="_blank" ${assetNameColor && `style="color: #${assetNameColor}"`}>${asset_name}</a>
               </p>
             </div>`;
         }).join('');
@@ -104,9 +110,9 @@
     let onNext = function(event) {
       curr = (curr + 1) % count;
 
-      $(self).find('.active').toggleClass('active');
-      $(self).find(`#slide-${curr}`).toggleClass('active');
-      $(self).find(`[data-target="#slide-${curr}"]`).toggleClass('active');
+      $(self).find('.active').toggleClass('active')
+      $(self).find(`#slide-${curr}`).toggleClass('active')
+      $(self).find(`[data-target="#slide-${curr}"]`).toggleClass('active');     
     };
 
     let onPrev = function(event) {
