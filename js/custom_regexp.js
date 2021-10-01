@@ -1,0 +1,1 @@
+const color_regexp = new RegExp(/^([ABCDEFabcdef0-9]{3}|[ABCDEFabcdef0-9]{6})$/);

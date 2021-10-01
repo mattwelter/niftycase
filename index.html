@@ -38,6 +38,7 @@
       <p class="made-by">Made with <a href="https://niftycase.io" target="_blank">Niftycase</a></p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/custom_regexp.js"></script>
     <script src="js/nft_scroller.js"></script>
     <script src="js/nft_slider.js"></script>
     <script type="text/javascript">
@@ -48,6 +49,8 @@
 
           const urlSearchParams = new URLSearchParams(window.location.search);
           const params = Object.fromEntries(urlSearchParams.entries());
+
+          console.log(params);
           if (params.view && parseInt(params.view) === 2) {
 
             $('head').append('<link rel="stylesheet" href="css/nft_scroller.css" />');
@@ -78,6 +81,16 @@
               }
             });
 
+          }
+
+          const bgColor = !params.bg_color ? false : color_regexp.test(params.bg_color) ? params.bg_color : false;
+
+          if (bgColor) {
+            const $nftSlider = document.querySelector(".nft-slider");
+
+            $nftSlider.style.background = `#${bgColor}`
+            document.body.style.background = `#${bgColor}`
+            
           }
 
         });
