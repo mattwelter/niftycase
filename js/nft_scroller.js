@@ -9,6 +9,73 @@
     }).join('&');
   }
 
+  // let getFloorPrice = function(addr) {
+  //   const qs = getQueryString({
+  //     owner: addr,
+  //     offset: 0,
+  //     order_direction: 'desc'
+  //   });
+  //   // maybe use async await here!
+  //   $.ajax({
+  //     url: API_URL + (qs ? '?' + qs : ''),
+  //     type: 'GET',
+  //   }).done(function(data) {
+  //     if (!data.assets || !data.assets.length > 0) {
+  //       return;
+  //     }
+  //     console.log(data.assets)
+
+  //     let totalFloorPrice = [];
+
+  //     for(var i = 0; i < data.assets.length; i++)
+  //     {
+  //       console.log(data.assets[i].asset_contract.address)
+
+  //       const getCollectionData = async (contract_addr) => {
+  //         return new Promise(resolve => setTimeout(resolve, 125)).then(() => {
+  //           const url = 'https://api.opensea.io/api/v1/asset/' + contract_addr + "/1/";
+  //           const options = {
+  //             method: 'GET',
+  //             headers: {
+  //               'Content-Type': 'application/json',
+  //             }
+  //           };
+  //           return fetch(url, options)
+  //             .then(res => res.json())
+  //             .then(data => {
+
+  //               totalFloorPrice.push(data.collection.stats.floor_price)
+
+  //               console.log(totalFloorPrice)
+
+  //               const sum = totalFloorPrice.reduce(add,0);
+
+  //               function add(accumulator, a) {
+  //                   return accumulator + a;
+  //               }
+
+  //               console.log("Total floor price", sum);
+
+  //               //   1 day vol, change, sales
+  //               //   7 day vol, change, sales
+  //               //   30 day vol, change, sales
+  //               //   count/supply
+  //               //   % of owners
+  //               //   floor price
+
+  //               // extra details i want to get (from other apis)
+
+  //               //   # of discord members
+  //               //   # of twitter followers
+  //             })
+  //         });
+  //       };
+
+  //       getCollectionData(data.assets[i].asset_contract.address)
+  //     }
+  //   })
+  // };
+
   if (window.location.href.indexOf("dm") > -1) {
     document.getElementById("eth-logo").src = "media/eth2.png"
   }
@@ -51,6 +118,17 @@
       });
     };
 
+    let makeNoNfts = function(addr) {
+      let elem = $(self).find('.nft-content');
+        elem.append($(`
+          <div class="nft-card" style="width: 100%; height: 200px;">
+          <svg viewBox="0 0 36 36" style="font-size: 40px; padding-bottom: 12px; margin-top: 40px; height: 1.25em; position: relative; width: inherit; display: inline-block;" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-xb2eav r-1xvli5t r-dnmrzs r-kzbkwu r-bnwqim r-1plcrui r-lrvibr"><g><path d="M35.508 15.41l-9.295-3.387L22.438 1.47c-.108-.302-.357-.48-.722-.495-.322.007-.604.22-.698.53l-3.293 10.71-9.132 3.805c-.285.118-.467.4-.46.708.007.308.203.58.492.686L17.92 20.8l3.775 10.552c.107.298.39.496.704.496h.016c.322-.007.604-.22.698-.53l3.293-10.712 9.132-3.803c.284-.118.466-.4.46-.708-.007-.308-.203-.58-.492-.686z" fill="#61BCF6"></path><path d="M9.57 4.715l-2.906.065-.06-2.715C6.585 1.34 5.983.763 5.256.78 4.53.796 3.955 1.4 3.97 2.125l.063 2.715-2.747.062C.56 4.92-.016 5.522 0 6.248c.017.726.62 1.302 1.346 1.285l2.747-.062.062 2.716c.017.726.62 1.302 1.345 1.286.726-.016 1.302-.62 1.286-1.345l-.062-2.715 2.905-.066c.725-.017 1.3-.62 1.285-1.346-.017-.726-.62-1.302-1.346-1.285z" fill="#F16888"></path><path d="M14.205 29.69l-1.65.036-.034-1.518c-.016-.726-.618-1.302-1.344-1.286s-1.302.62-1.286 1.345l.034 1.518-1.54.035c-.726.016-1.302.62-1.286 1.345.017.726.62 1.302 1.345 1.286l1.54-.034.034 1.518c.017.726.62 1.302 1.345 1.286.726-.016 1.302-.62 1.286-1.345l-.034-1.518 1.65-.037c.726-.016 1.302-.62 1.286-1.345-.016-.727-.62-1.303-1.345-1.286z" fill="#FD9E1A"></path></g></svg>
+            <a style="text-align: center; display: block; color: #333; font-size: 24px; font-weight: 600;">NOOOOOO</a>
+            <a style="text-align: center; display: block; color: rgb(83, 100, 113); margin-top: 8px; font-size: 17px; font-weight: 400;">did you know this mans has 0 nfts?</a>
+          </div>
+        `));
+    };
+
     let makeETHAddress = function(addr) {
       let path, node, addrElem = $(self).find('header div');
       path = addr.substring(0,Math.min(6, addr.length)) + '…' +
@@ -67,6 +145,8 @@
       tabElem.append(tabs);
     };
 
+    var totalFloorPrice = [];
+
     let requestActivity = function(addr) {
       const options = {method: 'GET', headers: {Accept: 'application/json'}};
       fetch(`https://api.opensea.io/api/v1/events?account_address=${addr}&only_opensea=false&offset=0&limit=50`, options)
@@ -82,6 +162,7 @@
             let backupImage     = response.asset_events[i].asset.collection.image_url
             let colllectionName = response.asset_events[i].asset.collection.name
             let assetId         = response.asset_events[i].asset.token_id
+            let contract_addr   = response.asset_events[i].asset.asset_contract.address
 
             const getPaymentToken = function() {
               if (response.asset_events[i].payment_token.symbol != null) {
@@ -89,6 +170,7 @@
                 return paymentToken;
               }
             }
+
 
             let eventDate       = response.asset_events[i].created_date     /*  Returns "2021-08-28T21:29:01.029737"  */
             const dateTime = moment(eventDate, "YYYY-MM-DDTh:mm:ss").utcOffset(0, true).fromNow();
@@ -228,6 +310,8 @@
         type: 'GET',
       }).done(function(data) {
         if (!data.assets || !data.assets.length > 0) {
+          console.log("User has 0 NFTs")
+          makeNoNfts()
           return;
         }
         makeCards(data.assets);
@@ -286,6 +370,7 @@
           requestAssets(opts.addr, pointer, limit);
         }
       });
+      // getFloorPrice(opts.addr)
       requestAssets(opts.addr, pointer, limit);
     } else {
       console.error('NFTScroller: No target address found.');
